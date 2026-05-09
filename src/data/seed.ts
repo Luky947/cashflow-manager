@@ -71,6 +71,7 @@ function tx(
     categoryId,
     date: daysAgo(daysBack),
     note,
+    recurringId: null,
     createdAt: iso,
     updatedAt: iso,
   }

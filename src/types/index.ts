@@ -5,8 +5,8 @@ export interface Transaction {
   currency: 'CZK'
   categoryId: string
   date: string
-  note: string
-  recurringId?: string
+  note: string | null
+  recurringId: string | null
   createdAt: string
   updatedAt: string
 }
@@ -33,7 +33,7 @@ export interface RecurringTransaction {
   type: 'income' | 'expense'
   amount: number
   categoryId: string
-  note: string
+  note: string | null
   intervalDays: number
   nextDue: string
   active: boolean

@@ -1,1 +1,42 @@
 @import "tailwindcss";
+
+:root {
+  --bg: #0f0e17;
+  --bg2: #1a1928;
+  --bg3: #1e1d2e;
+  --bg4: #252438;
+  --border: rgba(255, 255, 255, 0.06);
+  --border2: rgba(255, 255, 255, 0.10);
+  --text: #f0f0f0;
+  --text2: #9a9da8;
+  --text3: #5c6070;
+
+  --sheet-bg: #f5f5f7;
+  --sheet-bg2: #ffffff;
+  --sheet-border: rgba(0, 0, 0, 0.08);
+  --sheet-text: #0f0e17;
+  --sheet-text2: #5c6070;
+  --sheet-text3: #9a9da8;
+
+  --accent: #6c63ff;
+  --accent2: #4f9eff;
+  --gradient: linear-gradient(135deg, #6c63ff, #4f9eff);
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overscroll-behavior: none;
+}

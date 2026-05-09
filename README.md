@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# Cash Flow Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Osobní správce peněžních toků — offline-first PWA pro sledování příjmů, výdajů, rozpočtů a opakujících se plateb.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Vite** + **React 19** + **TypeScript**
+- **Tailwind CSS v4** (`@tailwindcss/vite`)
+- **Zustand** — centrální store s `persist` middleware (localStorage)
+- **React Router v6** — client-side routing
 
-## React Compiler
+## Funkce (Milestone 1 — základ)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Centrální Zustand store s kompletním CRUD pro transakce, kategorie, rozpočty a opakující se platby
+- localStorage persistence pod klíčem `cashflow-app-v1`
+- Ochrana před vyčištěním storage (Safari iOS fix) — detekce při hydrataci
+- Seed data: 5 kategorií + 10 ukázkových transakcí za poslední 2 měsíce
+- React Router routing pro 4 stránky
 
-## Expanding the ESLint configuration
+## Spuštění
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Struktura projektu
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── types/index.ts          # Všechny TypeScript interfacy
+├── store/useAppStore.ts    # Centrální Zustand store
+├── utils/storage.ts        # localStorage helpers (integrity check, size)
+├── data/seed.ts            # Výchozí kategorie + ukázkové transakce
+├── pages/
+│   ├── Dashboard.tsx
+│   ├── Transactions.tsx
+│   ├── Analytics.tsx
+│   └── Settings.tsx
+└── App.tsx                 # Router + seed init
+```
+
+## Plán milestones
+
+| Milestone | Obsah |
+|-----------|-------|
+| M1 ✅     | Store, typy, routing, seed data |
+| M2        | Dashboard — přehled měsíce, grafy, bilance |
+| M3        | Správa transakcí — přidávání, editace, filtrování |
+| M4        | Rozpočty a opakující se platby |
+| M5        | Export, analytika, PWA manifest |

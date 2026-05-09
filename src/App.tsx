@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { seedIfEmpty } from './data/seed'
+import { useAppStore } from './store/useAppStore'
 import Layout from './components/layout/Layout'
 import Dashboard from './pages/Dashboard'
 import Transactions from './pages/Transactions'
@@ -9,7 +10,13 @@ import Settings from './pages/Settings'
 
 export default function App() {
   useEffect(() => {
-    seedIfEmpty()
+    const unsub = useAppStore.persist.onFinishHydration(() => {
+      seedIfEmpty()
+      unsub()
+    })
+    if (useAppStore.persist.hasHydrated()) {
+      seedIfEmpty()
+    }
   }, [])
 
   return (

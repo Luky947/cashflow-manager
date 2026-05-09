@@ -44,61 +44,46 @@ const DEFAULT_CATEGORIES: Category[] = [
   },
 ]
 
-function daysAgo(n: number): string {
-  const d = new Date()
-  d.setDate(d.getDate() - n)
-  return d.toISOString().slice(0, 10)
-}
-
-function makeId(prefix: string, n: number) {
-  return `${prefix}-seed-${n}`
-}
-
-function tx(
-  n: number,
-  type: 'income' | 'expense',
-  amount: number,
-  categoryId: string,
-  daysBack: number,
-  note: string
-): Transaction {
-  const iso = new Date(daysAgo(daysBack) + 'T10:00:00.000Z').toISOString()
-  return {
-    id: makeId('tx', n),
-    type,
-    amount,
-    currency: 'CZK',
-    categoryId,
-    date: daysAgo(daysBack),
-    note,
-    recurringId: null,
-    createdAt: iso,
-    updatedAt: iso,
-  }
-}
-
 const SEED_TRANSACTIONS: Transaction[] = [
-  tx(1, 'income', 42000, 'cat-salary', 45, 'Výplata duben'),
-  tx(2, 'expense', 12500, 'cat-housing', 44, 'Nájem duben'),
-  tx(3, 'expense', 3200, 'cat-food', 40, 'Nákup v Albertu'),
-  tx(4, 'expense', 890, 'cat-transport', 38, 'Měsíční jízdenka'),
-  tx(5, 'expense', 650, 'cat-fun', 35, 'Kino + popcorn'),
-  tx(6, 'income', 42000, 'cat-salary', 15, 'Výplata květen'),
-  tx(7, 'expense', 12500, 'cat-housing', 14, 'Nájem květen'),
-  tx(8, 'expense', 2800, 'cat-food', 10, 'Rohlíky, zelenina, mléko'),
-  tx(9, 'expense', 1200, 'cat-transport', 7, 'Benzín'),
-  tx(10, 'expense', 430, 'cat-fun', 3, 'Netflix + Spotify'),
+  // Březen 2026
+  { id: 'tx-seed-1', type: 'income', amount: 42000, currency: 'CZK', categoryId: 'cat-salary', date: '2026-03-25', note: 'Výplata březen', recurringId: null, createdAt: '2026-03-25T10:00:00.000Z', updatedAt: '2026-03-25T10:00:00.000Z' },
+  { id: 'tx-seed-2', type: 'expense', amount: 12500, currency: 'CZK', categoryId: 'cat-housing', date: '2026-03-01', note: 'Nájem březen', recurringId: null, createdAt: '2026-03-01T10:00:00.000Z', updatedAt: '2026-03-01T10:00:00.000Z' },
+  { id: 'tx-seed-3', type: 'expense', amount: 3200, currency: 'CZK', categoryId: 'cat-food', date: '2026-03-10', note: 'Nákup v Albertu', recurringId: null, createdAt: '2026-03-10T10:00:00.000Z', updatedAt: '2026-03-10T10:00:00.000Z' },
+  { id: 'tx-seed-4', type: 'expense', amount: 890, currency: 'CZK', categoryId: 'cat-transport', date: '2026-03-05', note: 'Měsíční jízdenka', recurringId: null, createdAt: '2026-03-05T10:00:00.000Z', updatedAt: '2026-03-05T10:00:00.000Z' },
+  { id: 'tx-seed-5', type: 'expense', amount: 650, currency: 'CZK', categoryId: 'cat-fun', date: '2026-03-15', note: 'Kino + popcorn', recurringId: null, createdAt: '2026-03-15T10:00:00.000Z', updatedAt: '2026-03-15T10:00:00.000Z' },
+  // Duben 2026
+  { id: 'tx-seed-6', type: 'income', amount: 42000, currency: 'CZK', categoryId: 'cat-salary', date: '2026-04-25', note: 'Výplata duben', recurringId: null, createdAt: '2026-04-25T10:00:00.000Z', updatedAt: '2026-04-25T10:00:00.000Z' },
+  { id: 'tx-seed-7', type: 'expense', amount: 12500, currency: 'CZK', categoryId: 'cat-housing', date: '2026-04-01', note: 'Nájem duben', recurringId: null, createdAt: '2026-04-01T10:00:00.000Z', updatedAt: '2026-04-01T10:00:00.000Z' },
+  { id: 'tx-seed-8', type: 'expense', amount: 2800, currency: 'CZK', categoryId: 'cat-food', date: '2026-04-12', note: 'Rohlíky, zelenina, mléko', recurringId: null, createdAt: '2026-04-12T10:00:00.000Z', updatedAt: '2026-04-12T10:00:00.000Z' },
+  { id: 'tx-seed-9', type: 'expense', amount: 1200, currency: 'CZK', categoryId: 'cat-transport', date: '2026-04-18', note: 'Benzín', recurringId: null, createdAt: '2026-04-18T10:00:00.000Z', updatedAt: '2026-04-18T10:00:00.000Z' },
+  // Květen 2026
+  { id: 'tx-seed-10', type: 'income', amount: 42000, currency: 'CZK', categoryId: 'cat-salary', date: '2026-05-06', note: 'Výplata květen', recurringId: null, createdAt: '2026-05-06T10:00:00.000Z', updatedAt: '2026-05-06T10:00:00.000Z' },
+  { id: 'tx-seed-11', type: 'expense', amount: 12500, currency: 'CZK', categoryId: 'cat-housing', date: '2026-05-01', note: 'Nájem květen', recurringId: null, createdAt: '2026-05-01T10:00:00.000Z', updatedAt: '2026-05-01T10:00:00.000Z' },
+  { id: 'tx-seed-12', type: 'expense', amount: 2400, currency: 'CZK', categoryId: 'cat-food', date: '2026-05-07', note: 'Týdenní nákup', recurringId: null, createdAt: '2026-05-07T10:00:00.000Z', updatedAt: '2026-05-07T10:00:00.000Z' },
+  { id: 'tx-seed-13', type: 'expense', amount: 430, currency: 'CZK', categoryId: 'cat-fun', date: '2026-05-03', note: 'Netflix + Spotify', recurringId: null, createdAt: '2026-05-03T10:00:00.000Z', updatedAt: '2026-05-03T10:00:00.000Z' },
+]
+
+const OLD_SEED_IDS = [
+  'tx-seed-1', 'tx-seed-2', 'tx-seed-3', 'tx-seed-4', 'tx-seed-5',
+  'tx-seed-6', 'tx-seed-7', 'tx-seed-8', 'tx-seed-9', 'tx-seed-10',
 ]
 
 export function seedIfEmpty(): void {
-  const { categories, transactions, addCategory, addTransaction } =
+  const existingSeedIds = OLD_SEED_IDS
+  const { transactions } = useAppStore.getState()
+  const hasOldSeeds = existingSeedIds.every(id => transactions.some(t => t.id === id))
+  if (hasOldSeeds) {
+    existingSeedIds.forEach(id => useAppStore.getState().deleteTransaction(id))
+  }
+
+  const { categories, transactions: txAfterClean, addCategory, addTransaction } =
     useAppStore.getState()
 
   if (categories.length === 0) {
     DEFAULT_CATEGORIES.forEach(addCategory)
   }
 
-  if (transactions.length === 0) {
+  if (txAfterClean.length === 0) {
     SEED_TRANSACTIONS.forEach(addTransaction)
   }
 }
